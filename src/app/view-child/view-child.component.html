@@ -1,0 +1,99 @@
+<form (ngSubmit)="submit(f)" #f="ngForm">
+  <div class="form-group">
+    <input
+      type="text"
+      #name="ngModel"
+      ngModel
+      class="form-control"
+      placeholder="Il tuo nome"
+      required
+      name="nome"
+    />
+    <span *ngIf="name.invalid && name.touched">Devi inserire il nome</span>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      #cognome="ngModel"
+      ngModel
+      class="form-control"
+      placeholder="Il tuo cognome"
+      required
+      name="cognome"
+    />
+    <span *ngIf="cognome.invalid && cognome.touched"
+      >Devi inserire il cognome</span
+    >
+  </div>
+
+  <div ngModelGroup="authData" class="form-row row" #authGroup="ngModelGroup">
+    <!-- con ngGroupModel otterrò i dati raggruppati sotto forma di oggetto -->
+    <div class="form-group col-6">
+      <input
+        type="email"
+        ngModel
+        class="form-control"
+        placeholder="La tua email"
+        required
+        name="email"
+      />
+    </div>
+    <div class="form-group col-6">
+      <input
+        type="password"
+        ngModel
+        class="form-control"
+        placeholder="La tua password"
+        required
+        name="password"
+      />
+    </div>
+    <span *ngIf="authGroup.invalid && authGroup.touched"
+      >Dati non corretti</span
+    >
+  </div>
+
+  <div class="form-row row">
+    <div class="form-group col col-6">
+      <select name="city" ngModel class="form-control">
+        <option value="">--Scegli città--</option>
+        <option value="milano">Milano</option>
+        <option value="roma">Roma</option>
+        <option value="napoli">Napoli</option>
+      </select>
+    </div>
+    <div class="form-group col col-6">
+      <input
+        type="number"
+        ngModel
+        class="form-control"
+        placeholder="cap"
+        name="cap"
+      />
+      <span></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="form-check">
+      <div *ngFor="let genere of generi">
+        <label for="" class="form-check-label" [for]="genere">{{
+          genere
+        }}</label>
+        <input
+          type="radio"
+          [id]="genere"
+          [value]="genere"
+          ngModel
+          name="genere"
+          class="form-check-input"
+        />
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-danger" (click)="setDati()">Fill</button>
+
+  <button [disabled]="f.invalid" class="btn btn-primary">Invia</button>
+</form>
